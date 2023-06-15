@@ -37,7 +37,7 @@ func main() {
 }
 
 func read() byte {
-	checkInput()
+	checkInput_()
 	if iterator < len(output) {
 		char = output[iterator]
 		iterator++
@@ -166,14 +166,20 @@ func contains(symbol byte, array []byte) bool {
 	return !(steps == len(array))
 }
 
+func checkInput_() {
+	if !(contains(output[iterator], letters) || contains(output[iterator], operations)) {
+		log.Fatal("Нераспознанный символ")
+	}
+}
+
 func checkInput() {
 	if iterator < len(output)-1 {
 		if output[iterator] == ')' && output[iterator+1] == '(' {
 			ERR = 1
 		}
-	}
-}
 
-func checkInput_() bool {
-	return contains(char, letters) || contains(char, operations)
+		if !(contains(output[iterator], letters) || contains(output[iterator], operations)) {
+			log.Fatal("Нераспознанный символ")
+		}
+	}
 }
