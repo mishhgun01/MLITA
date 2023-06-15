@@ -37,7 +37,6 @@ func main() {
 }
 
 func read() byte {
-	checkInput_()
 	if iterator < len(output) {
 		char = output[iterator]
 		iterator++
@@ -83,8 +82,10 @@ func HelpRSAction() {
 	if contains(char, operations) {
 		Operation()
 		NextRSAction()
-	} else {
-		char = read()
+	} else if char == '[' || contains(char, letters) {
+		return
+	} else if char != 0 {
+		ERR = 1
 	}
 }
 
@@ -104,8 +105,10 @@ func HelpSSAction() {
 	if contains(char, operations) {
 		Operation()
 		NextSSAction()
-	} else {
-		char = read()
+	} else if char == '[' || contains(char, letters) || char == '(' {
+		return
+	} else if char != 0 {
+		ERR = 1
 	}
 }
 
@@ -131,8 +134,10 @@ func Action() {
 	} else if contains(char, letters) {
 		CorrectEntry()
 	} else if char == ')' {
+		char = read()
 		HelpRSAction()
 	} else if char == ']' {
+		char = read()
 		HelpSSAction()
 	} else if char == '[' {
 		CorrectEntry()
