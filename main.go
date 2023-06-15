@@ -142,7 +142,7 @@ func Action() {
 	} else if char == '(' {
 		CorrectEntry()
 	} else {
-		ERR = 1
+		char = read()
 	}
 }
 func Operation() {
